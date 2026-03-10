@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { About } from './about/about';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, About],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   title = 'my-app';
-   fullName = 'Angular 15';
-  age = 10;
+  fullName = 'LVB';
+  age = 20;
 
-  // method: function
-  sayHello() {
-    console.log('hello ');
-    alert('hello ' + this.fullName);
+  handleClick() {
+    alert("Bạn đã click button");
   }
 }
