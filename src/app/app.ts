@@ -12,7 +12,4 @@ export class App {
   fullName = 'LVB';
   age = 20;
 
-  handleClick() {
-    alert("Bạn đã click button");
-  }
 }

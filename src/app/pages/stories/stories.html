@@ -1,0 +1,32 @@
+<h2>Danh sách truyện tranh</h2>
+
+@if (stories.length === 0) {
+  <p class="mt-6 text-lg text-gray-600">Không có truyện nào</p>
+}
+
+<div class="story-list">
+  @for (story of stories; track story.title; let i = $index) {
+    <div class="story-card">
+      <div class="story-header">
+        <div class="story-thumb">
+          <img src="{{story.image}}" alt="{{story.title}}">
+        </div>
+
+        <div class="story-info">
+          <h3 class="story-title">{{story.title}}</h3>
+          <p class="story-meta">Tác giả: {{story.author}}</p>
+          <p class="story-meta">Năm sáng tác: {{story.year}}</p>
+          <p class="story-meta">Thể loại: {{story.genre}}</p>
+        </div>
+
+        <div class="story-stats">
+          <p class="story-views">{{story.views}} lượt xem</p>
+          @if (story.views > 80000) {
+            <span class="hot">Truyện nổi bật</span>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
