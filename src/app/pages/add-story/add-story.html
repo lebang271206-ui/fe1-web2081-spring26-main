@@ -1,0 +1,28 @@
+<h2>Thêm truyện tranh</h2>
+
+<form [formGroup]="addForm" (ngSubmit)="submitForm()">
+  <div>
+    <label>Tên: </label>
+    <input type="text" formControlName="name" />
+    @if (name?.invalid && name?.touched) {
+
+<p style="color:red">Tên truyện phải ít nhất 3 ký tự</p>
+    }
+  </div>
+
+  <div>
+    <label>Giá: </label>
+    <input type="number" formControlName="price" />
+    @if (price?.invalid && price?.touched) {
+
+<p style="color:red">Giá phải lớn hơn 0</p>
+    }
+  </div>
+
+  <div>
+    <label>Thể loại</label>
+    <input type="text" formControlName="category" />
+  </div>
+
+  <button type="submit" [disabled]="addForm.invalid">Thêm truyện</button>
+</form>
