@@ -17,7 +17,7 @@
           <p class="story-meta">Tác giả: {{story.author}}</p>
           <p class="story-meta">Năm sáng tác: {{story.year}}</p>
           <p class="story-meta">Thể loại: {{story.genre}}</p>
-          <button (click) = "handleClick()">Click me</button>
+           <button (click)="handleClick(story.title)">Click me</button>
         </div>
 
         <div class="story-stats">

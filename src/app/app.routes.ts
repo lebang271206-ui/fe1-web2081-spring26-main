@@ -1,3 +1,4 @@
+import { AddStory } from './pages/add-stories/add-stories';
 import { Routes } from '@angular/router';
 import { Home } from './home/home';
 import { About } from './pages/about/about';
@@ -25,5 +26,9 @@ export const routes: Routes = [
 {
     path: 'stories',
     component: Stories,
+},
+{
+    path: 'add-stories',
+    component: AddStory,
 },
 ];

@@ -41,7 +41,7 @@ export class Stories {
       image: "https://imgsrv.crunchyroll.com/cdn-cgi/image/fit=cover,format=auto,quality=85,width=1920/keyart/GY3VKX1MR-backdrop_wide",
     },
   ];
-  handleClick() {
-    alert("Bạn đã click vào truyện");
+  handleClick(title: string) {
+    alert(`Bạn đã click vào truyện "${title}"`);
   }
 }
