@@ -1,28 +1,32 @@
-<h2>Thêm truyện tranh</h2>
-
+<h2>Thêm Story</h2>
 <form [formGroup]="addForm" (ngSubmit)="submitForm()">
-  <div>
-    <label>Tên: </label>
-    <input type="text" formControlName="name" />
-    @if (name?.invalid && name?.touched) {
+  <input placeholder="Title" formControlName="title" />
+  <input placeholder="Author" formControlName="author" />
+  <input type="number" placeholder="Views" formControlName="views" />
 
-<p style="color:red">Tên truyện phải ít nhất 3 ký tự</p>
-    }
-  </div>
-
-  <div>
-    <label>Giá: </label>
-    <input type="number" formControlName="price" />
-    @if (price?.invalid && price?.touched) {
-
-<p style="color:red">Giá phải lớn hơn 0</p>
-    }
-  </div>
-
-  <div>
-    <label>Thể loại</label>
-    <input type="text" formControlName="category" />
-  </div>
-
-  <button type="submit" [disabled]="addForm.invalid">Thêm truyện</button>
+  <button type="submit">Add Story</button>
 </form>
+
+<hr />
+
+<h2>Thêm Product</h2>
+<form [formGroup]="productForm" (ngSubmit)="submitProduct()">
+  <input placeholder="Name" formControlName="name" />
+  <input type="number" placeholder="Price" formControlName="price" />
+
+  <button type="submit">Add Product</button>
+</form>
+
+<hr />
+
+<h2>Danh sách Story</h2>
+
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>
+<div *ngIf="success">{{ success }}</div>
+
+<ul>
+  <li *ngFor="let s of stories">
+    {{ s.title }} - {{ s.author }} - {{ s.views }} views
+  </li>
+</ul>

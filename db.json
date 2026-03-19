@@ -1,0 +1,10 @@
+{
+  "stories": [
+    { "id": 1, "title": "Naruto", "author": "Kishimoto", "views": 1000 },
+    { "id": 2, "title": "One Piece", "author": "Oda", "views": 2000 }
+  ],
+  "products": [
+    { "id": 1, "name": "Gundam RX78", "price": 500 },
+    { "id": 2, "name": "MG Barbatos", "price": 800 }
+  ]
+}

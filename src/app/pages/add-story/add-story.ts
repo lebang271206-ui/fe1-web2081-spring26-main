@@ -1,37 +1,93 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-add-story',
-  imports: [ReactiveFormsModule],
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-story.html',
-  styleUrl: './add-story.css',
 })
 export class AddStory {
   addForm: FormGroup;
+  productForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  stories: any[] = [];
+
+  loading = false;
+  error = '';
+  success = '';
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {
     this.addForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      price: ['', Validators.min(0.01)],
-      category: ['', [Validators.required]],
+      title: '',
+      author: '',
+      views: 0
+    }); 
+
+    this.productForm = this.fb.group({
+      name: '',
+      price: 0
+    });
+
+        this.loadStories();
+  }
+
+    submitForm() {
+    this.loading = true;
+    this.error = '';
+    this.success = '';
+
+    const data = this.addForm.value;
+
+    this.http.post('http://localhost:3000/stories', data).subscribe({
+      next: () => {
+        this.loading = false;
+        this.success = 'Thêm truyện thành công';
+        this.addForm.reset({ views: 0 });
+        this.loadStories();
+      },
+      error: () => {
+        this.loading = false;
+        this.error = 'Có lỗi xảy ra';
+      },
     });
   }
 
-  get name() {
-  return this.addForm.get('name');
-}
+  submitProduct() {
+    this.loading = true;
+    this.error = '';
+    this.success = '';
 
-get price() {
-  return this.addForm.get('price');
-}
+    const data = this.productForm.value;
 
-  submitForm() {
-  if (this.addForm.invalid) {
-    console.log('Form không hợp lệ');
-    return;
+    this.http.post('http://localhost:3000/products', data).subscribe({
+      next: () => {
+        this.loading = false;
+        this.success = 'Thêm product thành công';
+        this.productForm.reset();
+      },
+      error: () => {
+        this.loading = false;
+        this.error = 'Có lỗi xảy ra';
+      },
+    });
   }
 
-  console.log('Form hợp lệ', this.addForm.value);
+  loadStories() {
+    this.loading = true;
+    this.error = '';
+
+    this.http.get<any[]>('http://localhost:3000/stories').subscribe({
+      next: (res) => {
+        this.stories = res;
+        this.loading = false;
+      },
+    });
+  }
 }
-}
+  
