@@ -1,33 +1,36 @@
-<h2>Danh sách truyện tranh</h2>
+<h2>Danh sách truyện</h2>
 
-@if (stories.length === 0) {
-  <p class="mt-6 text-lg text-gray-600">Không có truyện nào</p>
-}
+@if (loading) {
+<p>Đang tải dữ liệu...</p>} 
+@if (error) {
+<p style="color: red">{{ error }}</p>
+} @if (!loading && stories.length === 0) {
+<p>Không có truyện nào</p>
+} @if (stories.length > 0) {
+<table border="1" cellpadding="10" cellspacing="0">
+  <tr>
+    <th>ID</th>
+    <th>Tên truyện</th>
+    <th>Tác giả</th>
+    <th>Lượt xem</th>
+    <th>Hành động</th>
+  </tr>
 
-<div class="story-list">
-  @for (story of stories; track story.title; let i = $index) {
-    <div class="story-card">
-      <div class="story-header">
-        <div class="story-thumb">
-          <img src="{{story.image}}" alt="{{story.title}}">
-        </div>
-
-        <div class="story-info">
-          <h3 class="story-title">{{story.title}}</h3>
-          <p class="story-meta">Tác giả: {{story.author}}</p>
-          <p class="story-meta">Năm sáng tác: {{story.year}}</p>
-          <p class="story-meta">Thể loại: {{story.genre}}</p>
-           <button (click)="handleClick(story.title)">Click me</button>
-        </div>
-
-        <div class="story-stats">
-          <p class="story-views">{{story.views}} lượt xem</p>
-          @if (story.views > 80000) {
-            <span class="hot">Truyện nổi bật</span>
-          }
-        </div>
-      </div>
-    </div>
+  @for (story of stories; track story.id) {
+  <tr>
+    <td>{{ story.id }}</td>
+    <td>{{ story.title }}</td>
+    <td>{{ story.author }}</td>
+    <td>{{ story.views }}</td>
+    <td>
+      @if (story.views > 90000) {
+              <span style="color: red; font-weight: bold">HOT 🔥</span>
+            }
+    </td>
+    <td>
+      <button (click)="deleteStory(story.id)">Xóa</button>
+    </td>
+  </tr>
   }
-</div>
-
+</table>
+}
