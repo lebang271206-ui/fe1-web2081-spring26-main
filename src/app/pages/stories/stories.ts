@@ -20,6 +20,8 @@ export class Stories implements OnInit {
   loading = false;
   error = '';
 
+   deletingId: number | null = null;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -50,13 +52,16 @@ export class Stories implements OnInit {
   deleteStory(id: number) {
     const confirmDelete = confirm('Bạn có chắc muốn xóa không?');
     if (!confirmDelete) return;
+    this.deletingId = id;
 
     this.http.delete(`http://localhost:3000/stories/${id}`).subscribe({
       next: () => {
         this.stories = this.stories.filter((story) => story.id !== id);
         alert('Xóa thành công');
+        this.deletingId = null;
       },
       error: () => {
+        this.deletingId = null;
         alert('Xóa thất bại');
       },
     });
