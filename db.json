@@ -18,6 +18,26 @@
       "id": 2,
       "name": "MG Barbatos",
       "price": 800
+    },
+    {
+      "name": "",
+      "price": 0,
+      "id": 3
+    },
+    {
+      "name": null,
+      "price": null,
+      "id": 4
+    },
+    {
+      "name": null,
+      "price": null,
+      "id": 5
+    },
+    {
+      "name": null,
+      "price": null,
+      "id": 6
     }
   ]
 }

@@ -23,11 +23,6 @@
     <td>{{ story.author }}</td>
     <td>{{ story.views }}</td>
     <td>
-      @if (story.views > 90000) {
-              <span style="color: red; font-weight: bold">HOT 🔥</span>
-            }
-    </td>
-    <td>
       <button (click)="deleteStory(story.id)">Xóa</button>
     </td>
   </tr>

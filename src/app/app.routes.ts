@@ -6,6 +6,7 @@ import { Contact } from './pages/contact/contact';
 import { Products } from './pages/products/products';
 import { Stories } from './pages/stories/stories';
 import { Register } from './pages/register/register';
+import { EditStory } from './pages/edit-story/edit-story';
 
 export const routes: Routes = [
 {
@@ -36,4 +37,8 @@ export const routes: Routes = [
     path: 'register',
     component: Register,
 },
+{
+    path: 'edit/:id',
+    component: EditStory,
+}
 ];

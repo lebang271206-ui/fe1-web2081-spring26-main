@@ -1,0 +1,34 @@
+<h2>Sửa truyện</h2>
+
+<form [formGroup]="editForm" (ngSubmit)="submitForm()">
+  <input type="text" formControlName="title" placeholder="Title" />
+
+@if (editForm.get('title')?.touched && editForm.get('title')?.invalid) {
+  <p style="color:red">
+    @if (editForm.get('title')?.errors?.['required']) {
+      Title không được để trống
+    }
+    @if (editForm.get('title')?.errors?.['minlength']) {
+      Title phải >= 3 ký tự
+    }
+  </p>
+}
+  <br />
+
+  <input type="text" formControlName="author" placeholder="Author" />
+  <br />
+
+  <input type="number" formControlName="views" placeholder="Views" />
+  <br />
+
+  <button type="submit" [disabled]="loading">
+    {{ loading ? 'Đang cập nhật...' : 'Cập nhật' }}
+  </button>
+</form>
+
+@if (success) {
+<p style="color: green">{{ success }}</p>
+} 
+@if (error) {
+<p style="color: red">{{ error }}</p>
+}
