@@ -1,41 +1,49 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component } from "@angular/core";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-register',
+  selector: "app-register",
   imports: [ReactiveFormsModule],
-  templateUrl: './register.html',
-  styleUrl: './register.css',
+  templateUrl: "./register.html",
+  styleUrl: "./register.css",
 })
 export class Register {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  loading = false;
+  error = "";
+  success = "";
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+  ) {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required]],
-      email: ['',[Validators.required]],
-      password: ['', [Validators.required, , Validators.minLength(6)]],
+      name: "",
+      email: "",
+      password: "",
     });
   }
 
-  get name() {
-  return this.registerForm.get('name');
-}
-
-get email() {
-  return this.registerForm.get('email');
-}
-
-get password() {
-  return this.registerForm.get('password');
-}
-
   submitForm() {
-  if (this.registerForm.invalid) {
-    console.log('Form không hợp lệ');
-    return;
-  }
 
-  console.log('Form hợp lệ', this.registerForm.value);
-}
+    this.loading = true;
+    this.error = "";
+    this.success = "";
+
+    this.http.post("http://localhost:3000/register", this.registerForm.value).subscribe({
+      next: () => {
+        this.loading = false;
+        this.success = "Đăng ký thành công";
+        this.router.navigateByUrl("/login");
+      },
+      error: () => {
+        this.loading = false;
+        this.error = "Đăng ký thất bại";
+      },
+    });
+  }
 }
