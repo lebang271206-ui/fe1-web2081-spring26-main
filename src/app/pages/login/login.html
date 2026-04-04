@@ -1,0 +1,47 @@
+<div class="p-6 max-w-md mx-auto">
+  <h1 class="text-2xl font-semibold mb-6">Đăng Nhập</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="space-y-6">
+
+    <div>
+      <label class="block font-medium mb-1">Email</label>
+      <input formControlName="email" type="email"
+        class="w-full border rounded-lg px-3 py-2" />
+
+      @if (form.get('email')?.touched && form.get('email')?.invalid) {
+        <p class="text-red-500 text-sm mt-1">
+          @if (form.get('email')?.errors?.['required']) {
+            Email không được để trống
+          }
+          @if (form.get('email')?.errors?.['email']) {
+            Email không đúng định dạng
+          }
+        </p>
+      }
+    </div>
+
+    <div>
+      <label class="block font-medium mb-1">Mật khẩu</label>
+      <input formControlName="password" type="password"
+        class="w-full border rounded-lg px-3 py-2" />
+
+      @if (form.get('password')?.touched && form.get('password')?.invalid) {
+        <p class="text-red-500 text-sm mt-1">
+          @if (form.get('password')?.errors?.['required']) {
+            Mật khẩu không được để trống
+          }
+          @if (form.get('password')?.errors?.['minlength']) {
+            Mật khẩu phải ít nhất 6 ký tự
+          }
+        </p>
+      }
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="px-5 py-2 bg-blue-600 text-white rounded-lg w-full disabled:bg-gray-400">
+      Đăng Nhập
+    </button>
+  </form>
+</div>

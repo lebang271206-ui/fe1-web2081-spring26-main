@@ -66,4 +66,10 @@ export class Stories implements OnInit {
       },
     });
   }
+
+  logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  this.router.navigateByUrl("/login");
+}
 }
